@@ -48,6 +48,67 @@
   --gap:           var(--space-4);
 }
 
+
+.share-wrapper {
+  position: relative;
+}
+
+.share-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+
+  transition: .2s ease;
+  z-index: 1000;
+}
+
+.share-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.share-menu {
+  width: max-content;
+  max-width: 280px;
+}
+
+.share-menu {
+  transform-origin: top right;
+  transform: scale(.95);
+  opacity: 0;
+}
+
+.shareon {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.share-menu.is-open {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.share-menu::before {
+  content: "";
+  position: absolute;
+  right: 20px;
+  bottom: 100%;
+
+  border: 8px solid transparent;
+  border-bottom-color: #fff;
+}
+
 /* Reset enxuto ============================================== */
 *,
 *::before,

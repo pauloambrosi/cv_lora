@@ -15,6 +15,7 @@
   <meta name="theme-color" content="#0F766E">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link href="https://cdn.jsdelivr.net/npm/shareon@2/dist/shareon.min.css" rel="stylesheet">
 
   <!-- Open Graph -->
   <meta property="og:type" content="profile">
@@ -101,13 +102,30 @@
       <span>Baixar PDF</span>
     </button>
 
-    <button type="button" class="action-btn action-share" aria-label="Compartilhar este currículo">
-      <svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16">
-        <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13" />
-      </svg>
-      <span>Compartilhar</span>
-    </button>
+    <div class="share-wrapper">
+
+      <button type="button" class="action-btn action-share" aria-label="Compartilhar este currículo">
+        <svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16">
+          <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13" />
+        </svg>
+        <span>Compartilhar</span>
+      </button>
+
+      <div class="share-menu">
+        <div class="shareon">
+          <a class="copy-url"></a>
+          <a class="whatsapp"></a>
+          <a class="facebook"></a>
+          <a class="linkedin"></a>
+          <a class="telegram"></a>
+          <a class="threads"></a>
+          <a class="twitter"></a>
+          <a class="email"></a>
+        </div>
+      </div>
+    </div>
+
 
     <span class="action-feedback" id="share-feedback" role="status" aria-live="polite"></span>
   </div>
@@ -658,38 +676,33 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Compartilhar: Web Share API nativo, com fallback para copiar o link.
-    (function () {
-      var btn = document.querySelector('.action-share');
-      var feedback = document.getElementById('share-feedback');
-      if (!btn || !feedback) return;
-      var timer;
+    (() => {
+      const btn = document.querySelector('.action-share');
+      const menu = document.querySelector('.share-menu');
 
-      function announce(msg) {
-        feedback.textContent = msg;
-        feedback.classList.add('is-visible');
-        clearTimeout(timer);
-        timer = setTimeout(function () {
-          feedback.classList.remove('is-visible');
-        }, 3000);
-      }
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
 
-      btn.addEventListener('click', function () {
-        var url = window.location.href;
-        var data = { title: document.title, text: 'Currículo de Paulo Ambrosi', url: url };
-
-        if (navigator.share) {
-          navigator.share(data).catch(function () { /* usuário cancelou */ });
+        // Mobile: abre compartilhamento nativo
+        if (
+          navigator.share &&
+          /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+        ) {
+          navigator.share({
+            title: document.title,
+            text: 'Currículo de Paulo Ambrosi',
+            url: location.href
+          });
           return;
         }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(url).then(
-            function () { announce('Link copiado!'); },
-            function () { announce('Copie o link na barra de endereços'); }
-          );
-          return;
+
+        menu.classList.toggle('is-open');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.share-wrapper')) {
+          menu.classList.remove('is-open');
         }
-        announce('Copie o link na barra de endereços');
       });
     })();
   </script>
@@ -697,5 +710,8 @@
   <!-- Cloudflare Web Analytics · cookieless, sem banner LGPD -->
 
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/shareon@2/dist/shareon.iife.js" defer init></script>
+
 
 </html>
