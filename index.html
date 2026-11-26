@@ -26,7 +26,8 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 <style>
 :root{
   --bg:#f5f2ec; --paper:#fbf9f5; --ink:#1b1a17; --muted:#69655d; --line:#dbd5c9;
@@ -40,7 +41,7 @@ a{color:inherit}
 ul{list-style:none;padding:0}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 .wrap{max-width:1280px;margin:0 auto;padding:0 max(clamp(1rem,4vw,3rem),env(safe-area-inset-right,0px)) 0 max(clamp(1rem,4vw,3rem),env(safe-area-inset-left,0px))}
-.mono{font:500 .75rem/1.4 "Geist Mono",ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mono{font:500 .875rem/1.4 Outfit,system-ui,sans-serif;letter-spacing:.01em;color:var(--muted)}
 .serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;color:var(--accent);letter-spacing:-.01em}
 h1,h2,h3{font-weight:500;letter-spacing:-.03em;line-height:1.05}
 h2{font-size:clamp(1.9rem,3.6vw,3rem);max-width:18ch}
@@ -72,30 +73,19 @@ nav ul a:active{color:var(--ink)}
 .hero p.lead{max-width:56ch;color:var(--muted);font-size:1.15rem}
 .cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.25rem}
 .now{align-self:end;background:var(--paper);border:1px solid var(--line);border-radius:1.75rem;padding:clamp(1.5rem,2.5vw,2.25rem);box-shadow:0 24px 48px -28px rgba(60,48,24,.28)}
-.now h3{font-size:1.45rem;margin:.9rem 0 .35rem;letter-spacing:-.02em;line-height:1.2}
+.now .title{font-size:1.45rem;font-weight:500;color:var(--ink);margin:0 0 .35rem;letter-spacing:-.02em;line-height:1.2}
 .now p{color:var(--muted);font-size:.98rem}
 .now dl{margin-top:1.5rem;border-top:1px solid var(--line)}
 .now dl div{display:flex;justify-content:space-between;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
 .now dl div:last-child{border-bottom:0;padding-bottom:0}
 .now dt{color:var(--muted)}
 .now dd{text-align:right;font-weight:500}
-.live{display:inline-flex;align-items:center;gap:.55rem}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);position:relative}
-.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);animation:pulse 2.2s var(--ease-out) infinite}
-@keyframes pulse{from{transform:scale(1);opacity:.55}to{transform:scale(3.4);opacity:0}}
 @media (min-width:900px){.hero .wrap{grid-template-columns:1.55fr 1fr}}
 
 /* load-in cascade */
 .rise{animation:rise var(--t,.5s) var(--ease-out) var(--d,0ms) both}
 @keyframes rise{from{opacity:0;transform:translateY(var(--y,0));filter:blur(var(--b,0))}}
 
-/* marquee */
-.marquee{overflow:hidden;border-top:1px solid var(--line);padding:1.4rem 0;background:var(--paper)}
-.track{display:flex;width:max-content;animation:slide 48s linear infinite}
-.track ul{display:flex;flex-shrink:0}
-.track li{font-size:clamp(1.3rem,2.4vw,1.9rem);letter-spacing:-.02em;padding:0 1.5rem;white-space:nowrap;display:flex;align-items:center;gap:3rem}
-.track li::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
-@keyframes slide{to{transform:translateX(-50%)}}
 
 /* about */
 .about{display:grid;gap:clamp(2rem,5vw,5rem)}
@@ -104,7 +94,7 @@ nav ul a:active{color:var(--ink)}
 .about .text p:first-of-type{color:var(--ink);font-size:clamp(1.25rem,2vw,1.6rem);line-height:1.4;letter-spacing:-.015em}
 .stats{display:grid;grid-template-columns:1fr 1fr;margin-top:3rem;border-top:1px solid var(--line)}
 .stats div{padding:1.4rem 1rem 1.4rem 0;border-bottom:1px solid var(--line)}
-.stats strong{display:block;font:400 clamp(2.2rem,4vw,3.2rem)/1 "Geist Mono",monospace;letter-spacing:-.05em}
+.stats strong{display:block;font:400 clamp(2.6rem,4.6vw,3.8rem)/1 "Instrument Serif",Georgia,serif;letter-spacing:-.02em;color:var(--accent)}
 .stats span{color:var(--muted);font-size:.93rem}
 @media (min-width:900px){.about{grid-template-columns:1fr 1.7fr}.stats{grid-template-columns:repeat(4,1fr)}}
 
@@ -125,10 +115,10 @@ nav ul a:active{color:var(--ink)}
 .time .org{color:var(--accent);font-weight:500;margin:.3rem 0 .8rem}
 .time p{color:var(--muted);max-width:66ch}
 details{margin-top:1rem}
-summary{touch-action:manipulation;user-select:none;-webkit-user-select:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font-size:.95rem;font-weight:500;list-style:none;border-bottom:1px solid var(--ink);padding-bottom:2px}
+summary{touch-action:manipulation;user-select:none;-webkit-user-select:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font-size:.95rem;font-weight:500;list-style:none;min-height:44px;text-decoration:underline;text-underline-offset:4px}
 summary::-webkit-details-marker{display:none}
 summary:active{opacity:.6}
-summary::after{content:"+";font-family:"Geist Mono",monospace;transition:transform .2s var(--ease-out)}
+summary::after{content:"+";transition:transform .2s var(--ease-out)}
 details[open] ul{animation:open .2s var(--ease-out)}
 @keyframes open{from{opacity:0;transform:translateY(-6px)}}
 details[open] summary::after{transform:rotate(45deg)}
@@ -192,12 +182,11 @@ h2.reveal.in{filter:none;transition:opacity .9s var(--ease-out),transform .9s va
   .areas li:hover h3{color:var(--accent)}
   .areas li:hover{transform:translateX(14px)}
   .panel:hover{transform:translateY(-6px)}
-  .marquee:hover .track{animation-play-state:paused}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .rise{--y:0!important;--d:0ms!important;--t:.2s!important}
-  .track,details[open] ul,.dot::after{animation:none}
+  details[open] ul{animation:none}
   .areas li:hover,.panel:hover{transform:none}
   .btn:active,.btn:hover svg{transform:none}
 }
@@ -244,8 +233,7 @@ h2.reveal.in{filter:none;transition:opacity .9s var(--ease-out),transform .9s va
     </div>
 
     <aside class="now rise" style="--d:360ms;--y:28px;--t:1s" aria-label="Disponibilidade">
-      <span class="mono live"><span class="dot" aria-hidden="true"></span>Disponível</span>
-      <h3>Aberta a novos projetos</h3>
+      <p class="title">Aberta a novos projetos</p>
       <p>Consultoria, projetos pontuais, aulas e palestras.</p>
       <dl>
         <div><dt>Produto</dt><dd>Discovery e estratégia</dd></div>
@@ -257,27 +245,20 @@ h2.reveal.in{filter:none;transition:opacity .9s var(--ease-out),transform .9s va
   </div>
 </section>
 
-<div class="marquee" aria-hidden="true">
-  <div class="track">
-    <ul><li>Product Management</li><li>Gestão de Produtos Digitais</li><li>Transformação Digital</li><li>Go-to-Market</li><li>Product Discovery</li><li>Comunicação Institucional</li><li>Inteligência de Mercado</li><li>Governança</li><li>Design Instrucional</li><li>Liderança</li></ul>
-    <ul><li>Product Management</li><li>Gestão de Produtos Digitais</li><li>Transformação Digital</li><li>Go-to-Market</li><li>Product Discovery</li><li>Comunicação Institucional</li><li>Inteligência de Mercado</li><li>Governança</li><li>Design Instrucional</li><li>Liderança</li></ul>
-  </div>
-</div>
-
 <section id="sobre">
   <div class="wrap about">
     <div>
       <h2>Sobre <span class="serif">mim.</span></h2>
     </div>
     <div class="text">
-      <p>Minha atuação conecta estratégia, produto, marketing, negócios e governança, traduzindo necessidades organizacionais e de mercado em soluções com foco em crescimento, experiência do cliente e geração de valor.</p>
+      <p>Minha atuação conecta estratégia, produto, marketing, negócios e governança, transformando necessidades de instituições e do mercado em cursos, produtos digitais e lançamentos.</p>
       <p>Trabalho com benchmarking, análise de mercado e identificação de oportunidades para apoiar decisões estratégicas e o direcionamento de portfólios. Tenho experiência em gestão de operações, planejamento estratégico, estruturação de processos, liderança de equipes multidisciplinares, desenvolvimento de negócios, relacionamento institucional e parcerias.</p>
       <p>No marketing, atuo especialmente em posicionamento, comunicação, eventos e lançamentos. Sou pós-graduada em Digital Product Management pela FIAP e professora universitária nas áreas de Transformação Digital, UX, Educação, Gestão e Produtos Digitais.</p>
       <div class="stats">
         <div><strong>15</strong><span>anos em inovação, educação e transformação digital</span></div>
         <div><strong>+40</strong><span>entrevistas de discovery com usuários e especialistas</span></div>
         <div><strong>7</strong><span>marcas educacionais em um mesmo portfólio de produtos</span></div>
-        <div><strong>4</strong><span>pós-graduações, de audiovisual a gestão de produto</span></div>
+        <div><strong>3</strong><span>pós-graduações, de audiovisual a gestão de produto</span></div>
       </div>
     </div>
   </div>
